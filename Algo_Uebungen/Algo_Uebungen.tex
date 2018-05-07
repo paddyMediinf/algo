@@ -1,0 +1,240 @@
+
+% ----------------------- TODO ---------------------------
+% Diese Daten müssen pro Blatt angepasst werden:
+\newcommand{\NUMBER}{1}
+\newcommand{\EXERCISES}{3}
+% Diese Daten müssen einmalig pro Vorlesung angepasst werden:
+\newcommand{\COURSE}{Algorithmen}
+\newcommand{\TUTOR}{Jan Splett}
+\newcommand{\STUDENTA}{Sarah Ertel}
+\newcommand{\STUDENTB}{Patrick Greher}
+\newcommand{\STUDENTC}{Eugen Ljavin}
+\newcommand{\DEADLINE}{26.04.2018}
+% ----------------------- TODO ---------------------------
+
+%Template 
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry,forloop,fancyhdr,fancybox,lastpage}
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Math
+\usepackage{amsmath,amssymb,tabularx}
+
+%Figures
+\usepackage{graphicx,tikz,color,float}
+\usetikzlibrary{shapes,trees}
+
+%Algorithms
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+%Kopf- und Fußzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: \TUTOR}
+\fancyhead[C]{\COURSE}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage}
+
+%Formatierung der Überschrift, hier nichts ändern
+\def\header#1#2{
+  \begin{center}
+    {\Large\textbf {\"U}bungsblatt #1}\\
+    {(Abgabetermin #2)}
+  \end{center}
+}
+
+%Definition der Punktetabelle, hier nichts ändern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr &
+      }
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+    \end{tabularx}
+  \end{center}
+}
+
+\begin{document}
+
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+  \begin{minipage}{\linewidth}
+    \STUDENTA\\
+    \STUDENTB\\
+    \STUDENTC
+  \end{minipage} & \begin{minipage}{\linewidth}
+    \punkteliste{1}{\EXERCISES}
+  \end{minipage}\\
+\end{tabularx}
+
+\header{Nr. \NUMBER}{\DEADLINE}
+
+% ----------------------- TODO ---------------------------
+% Hier werden die Aufgaben/Lösungen eingetragen:
+
+\section*{Aufgabe 1}
+
+\subsection*{a)}
+Zu zeigen: $f_1(n) {,} ~ f_2(n) = \mathcal{O}(g(n)) \Rightarrow f_1(n) + f_2(n) = \mathcal{O}(g(n))$ \\
+\begin{align*}
+\text{Sei } &&& f_1(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c_1 {,} n_1 ~ {>} ~ 0 ~ \forall ~ n \geq n_1 : f(n) \leq c_1 \cdot g(n) ~ \text{ und } \\ 
+&&& f_2(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c_2 {,} n_2 ~ {>} ~ 0 ~ \forall ~ n \geq n_2 : f(n) \leq c_2 \cdot g(n) \\ \\
+\text{Es gilt } &&& f_1(n) + f_2(n) \leq c_1 \cdot g(n) + c_2 \cdot g(n) = g(n) \cdot (c_1 + c_2) ~ \square
+\end{align*} \\ \\
+Zu zeigen: $f_1(n) {,} ~ f_2(n) = \mathcal{O}(g(n)) \Rightarrow f_1(n) \cdot f_2(n) = \mathcal{O}(g(n)^2)$
+\begin{align*}
+\text{Sei } &&& f_1(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c_1 {,} n_1 ~ {>} ~ 0 ~ \forall ~ n \geq n_1 : f(n) \leq c_1 \cdot g(n) ~ \text{ und } \\ 
+&&& f_2(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c_2 {,} n_2 ~ {>} ~ 0 ~ \forall ~ n \geq n_2 : f(n) \leq c_2 \cdot g(n) \\ \\
+\text{Es gilt } &&& f_1(n) \cdot f_2(n) \leq c_1 \cdot g(n) \cdot c_2 \cdot g(n) = c_1 \cdot c_2 \cdot g(n)^2 ~ \square
+\end{align*}
+
+\subsection*{b)}
+
+Zu zeigen: $f(n) = \mathcal{O}(g(n)) \wedge g(n) = \mathcal{O}(h(n)) \Rightarrow f(n) = \mathcal{O}(h(n))$
+
+\begin{align*}
+\text{Sei } &&& f(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c_0 {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : f(n) \leq c_0 \cdot g(n) ~ \wedge \\ 
+&&& g(n) = \mathcal{O}(h(n)) \Rightarrow \exists ~ c_1 {,} n_1 ~ {>} ~ 0 ~ \forall ~ n \geq n_1 : g(n) \leq c_1 \cdot h(n) \\ \\
+\text{Wähle } &&& n_2 = max(n_0 {,} n_1) {,} ~ c_2 = c_0 \cdot c_1 \\
+\text{Dann gilt } &&& \forall n \geq n_2 : f(n) \leq c_0 \cdot f(n) \leq c_0 \cdot c_1 \cdot h(n) = c_2 \cdot h(n)
+\end{align*} 
+\begin{align*}
+\Rightarrow \exists ~ c_2 {,} n_2 ~ {>} ~ 0 ~ \forall ~ n \geq n_2 : f(n) \leq c_2 \cdot h(n) ~ \square
+\end{align*}
+
+\newpage
+
+\subsection*{c)}
+
+Zu zeigen: $f(n) = \Theta(g(n)) \Longleftrightarrow g(n) = \Theta(f(n))$ \\ \\
+Links $\rightarrow$ Rechts:
+\begin{align*}
+\text{Sei} &&& f(n) = \Theta(g(n)) \Rightarrow \exists ~ c_1 {,} c_2 {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) \\
+\text{Es gilt } &&& (1) ~ c_1 \cdot g(n) \leq f(n) \Rightarrow g(n) \leq \frac{1}{c_1} \cdot f(n) \text{ und } \\
+&&& (2) ~ f(n) \leq c_2 \cdot g(n) \Rightarrow \frac{1}{c_2} \cdot f(n) \leq g(n) \\
+\text{Folglich } &&& \frac{1}{c_2} \cdot f(n) \leq g(n) \leq \frac{1}{c1} \cdot f(n) \\
+\text{Wähle } &&& c_3 = \frac{1}{c_2} \text{ und } ~ c_4 = \frac{1}{c_1}
+\end{align*} 
+\begin{align*}
+\Rightarrow \exists ~ c_3 {,} c_4 {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c_3 \cdot g(n) \leq f(n) \leq c_4 \cdot g(n) \text{ und somit ist } g(n) = \Theta(f(n))
+\end{align*} \\ \\
+Rechts $\rightarrow$ Links:
+\begin{align*}
+\text{Sei} &&& g(n) = \Theta(f(n)) \Rightarrow \exists ~ c_1 {,} c_2 {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c_1 \cdot f(n) \leq g(n) \leq c_2 \cdot f(n) \\
+\text{Es gilt } &&& (1) ~ c_1 \cdot f(n) \leq g(n) \Rightarrow f(n) \leq \frac{1}{c_1} \cdot g(n) \text{ und } \\
+&&& (2) ~ g(n) \leq c_2 \cdot f(n) \Rightarrow \frac{1}{c_2} \cdot g(n) \leq f(n) \\
+\text{Folglich } &&& \frac{1}{c_2} \cdot g(n) \leq f(n) \leq \frac{1}{c1} \cdot g(n) \\
+\text{Wähle } &&& c_3 = \frac{1}{c_2} \text{ und } ~ c_4 = \frac{1}{c_1} 
+\end{align*} 
+\begin{align*}
+\Rightarrow \exists ~ c_3 {,} c_4 {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c_3 \cdot f(n) \leq g(n) \leq c_4 \cdot f(n) \text{ und somit ist } f(n) = \Theta(g(n))  ~ \square
+\end{align*}
+
+\subsection*{d)}
+
+Zu zeigen: $f(n) = \mathcal{O}(g(n)) \Longleftrightarrow g(n) = \Omega(f(n))$ \\ \\
+Links $\rightarrow$ Rechts:
+\begin{align*}
+\text{Sei } &&& f(n) = \mathcal{O}(g(n)) \Rightarrow \exists ~ c {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : f(n) \leq c \cdot g(n) \\
+\text{Es gilt } &&& f(n) \leq c \cdot g(n) \Rightarrow \frac{1}{c} \cdot f(n) \leq g(n) \\
+\text{Wähle } &&& c_1 = \frac{1}{c}
+\end{align*} 
+\begin{align*}
+\Rightarrow \exists ~ c_1, n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c \cdot g(n) \leq f(n) \text{ und somit ist } g(n) = \Omega(f(n))
+\end{align*}
+Rechts $\rightarrow$ Links:
+\begin{align*}
+\text{Sei } &&& g(n) = \Omega(f(n)) \Rightarrow \exists ~ c {,} n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : c \cdot g(n) \leq f(n) \\
+\text{Es gilt } &&& c \cdot f(n) \leq g(n) \Rightarrow f(n) \leq \frac{1}{c} \cdot g(n) \\
+\text{Wähle } &&& c_1 = \frac{1}{c}
+\end{align*} 
+\begin{align*}
+\Rightarrow \exists ~ c_1, n_0 ~ {>} ~ 0 ~ \forall ~ n \geq n_0 : f(n) \leq c_1 \cdot g(n) \text{ und somit ist } f(n) = \mathcal{O}(g(n))  ~ \square
+\end{align*}
+
+\section*{Aufgabe 2}
+\subsection*{a)}
+$T(n)=T(\frac{n}{2})+1\\
+ \rightarrow a=1, b=2, f(n)=1\\
+ log_b a = log_2 1=0\\
+ \rightarrow f(n)=1 = n^0=n^{log_ba} \rightarrow$ 2.Fall Mastertheorem\\
+$ T(n) = \Theta(n^{log_ba})*log_bn$
+ \subsection*{b)}
+$T(n)=2T(\frac{n}{2})+1\\
+ \rightarrow a=2, b=2, f(n)=1\\
+ log_b a = log_2 2=1\\
+ \rightarrow f(n)=1 \leq n^{1-\epsilon} \rightarrow$ 1. Fall Mastertheorem\\
+ $T(n)=\Theta(n^{log_ba})$
+ \subsection*{c)}
+$T(n)=2T(\frac{n}{2})+n\\
+ \rightarrow a=2, b=2, f(n)=n\\
+ log_b a = log_2 2=1\\
+ \rightarrow f(n)=n = n^1=n^{log_ba} \rightarrow$ 2. Fall Mastertheorem\\
+ $T(n)=\Theta(n^{log_ba})*log_bn$
+
+\section*{Aufgabe 3}
+
+\subsection*{a)}
+
+\subsection*{b)}
+\begin{align*}
+T(1) & = 0 \\
+T(n) & = \frac{7}{8} \cdot T\left( \frac{7}{8} n \right) + \frac{7}{8} \cdot n \\
+& = \frac{7}{8} \cdot \left( \frac{7}{8} \cdot T\left(\frac{7}{8} \cdot \frac{7}{8} n \right) + \frac{7}{8} \cdot \frac{7}{8} \cdot n \right) + \frac{7}{8} \cdot n \\
+& = \frac{7}{8} \cdot \left( \frac{7}{8} \cdot T\left(\frac{49}{64} n \right) + \frac{49}{64} \cdot n \right) + \frac{7}{8} \cdot n \\
+& = \frac{7}{8} \cdot \left( \frac{7}{8} \cdot \left( \frac{7}{8} \cdot T\left(\frac{7}{8} \cdot \frac{49}{64} n \right) + \frac{7}{8} \cdot \frac{49}{64} \cdot n \right) + \frac{49}{64} \cdot n \right) + \frac{7}{8} \cdot n \\
+& = \frac{7}{8} \cdot \left( \frac{7}{8} \cdot \left( \frac{7}{8} \cdot T\left(\frac{343}{512} n \right) + \frac{343}{512} \cdot n \right) + \frac{49}{64} \cdot n \right) + \frac{7}{8} \cdot n \\
+& \vdots \\
+i \text{-ter Schritt: } & = \left( \frac{7}{8} \right)^i \cdot T\left(\left(  \frac{7}{8} \right)^i n \right) + n \cdot \underbrace{ \sum \left(  \frac{7}{8} \right)^i}_{\text{geom. Reihe}} \\
+& = \left( \frac{7}{8} \right)^i \cdot T\left(\left(  \frac{7}{8} \right)^i n \right) + n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} \\
+i+1 \text{-ter Schritt: } & = \left( \frac{7}{8} \right)^{i+1} \cdot T\left(\left(  \frac{7}{8} \right)^{i+1} n \right) + n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} \\
+\text{für } i+1 = \log n \text{: } & = \left( \frac{7}{8} \right)^{\log n} \cdot T\left(\left(  \frac{7}{8} \right)^{\log n} n \right) + n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} \\
+& = \left( \frac{7}{8} \right)^{\log n} \cdot T\left(1 \right) + n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} \\
+& = \left( \frac{7}{8} \right)^{\log n} \cdot 0 + n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} \\
+& = n \cdot \frac{\left(  \frac{7}{8} \right)^{n+1} - 1}{\left(  \frac{7}{8} \right) - 1} ~ \square
+\end{align*}
+
+\subsection*{c)}
+\begin{align*}
+T(1) & = 1 \\
+T(n) & = 2 \cdot T\left(\frac{2}{3}n\right) + 1 \\
+& = 2 \cdot (2 \cdot T\left(\frac{2}{3} \cdot \frac{2}{3}n\right) + 1) + 1 \\
+& = 2 \cdot (2 \cdot T\left(\frac{4}{9}n\right) + 1) + 1 \\
+& = 2 \cdot (2 \cdot (2 \cdot T \left(\frac{2}{3} \cdot \frac{4}{9}n\right) + 1) + 1) + 1 \\
+& = 2 \cdot (2 \cdot (2 \cdot T \left(\frac{8}{27}n\right) + 1) + 1) + 1 \\
+& \vdots \\
+i \text{-ter Schritt: } & = 2^i \cdot T\left(\left(\frac{2}{3}\right)^i n\right) + i \\
+i+1 \text{-ter Schritt: } & = 2^{i+1} \cdot T\left(\left(\frac{2}{3}\right)^{i+1} n\right) + {i+1} \\
+\text{für } i+1 = \log n \text{: } & = 2^{\log n} \cdot T\left(\left(\frac{2}{3}\right)^{\log n} n\right) + {\log n} \\
+& = 2^{\log n} \cdot T\left(1\right) + {\log n} \\
+& = 2^{\log n} \cdot 1 + {\log n} \\
+& = n \cdot 1 + {\log n} \\
+& = \mathcal{O}({\log n}) ~ \square
+\end{align*}
+
+\subsection*{d)}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

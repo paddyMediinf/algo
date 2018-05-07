@@ -1,0 +1,529 @@
+
+% ----------------------- TODO ---------------------------
+% Diese Daten müssen pro Blatt angepasst werden:
+\newcommand{\NUMBER}{3}
+\newcommand{\EXERCISES}{4}
+% Diese Daten müssen einmalig pro Vorlesung angepasst werden:
+\newcommand{\COURSE}{Algorithmen}
+\newcommand{\TUTOR}{Jan Splett}
+\newcommand{\STUDENTA}{Sarah Ertel}
+\newcommand{\STUDENTB}{Patrick Greher}
+\newcommand{\STUDENTC}{Eugen Ljavin}
+\newcommand{\DEADLINE}{10.05.2018}
+% ----------------------- TODO ---------------------------
+
+%Template 
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry,forloop,fancyhdr,fancybox,lastpage}
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Math
+\usepackage{amsmath,amssymb,tabularx}
+
+%Figures
+\usepackage{graphicx,tikz,color,float}
+\usetikzlibrary{shapes,trees}
+
+%Algorithms
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+%Kopf- und Fußzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: \TUTOR}
+\fancyhead[C]{\COURSE}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage}
+
+%Formatierung der Überschrift, hier nichts ändern
+\def\header#1#2{
+  \begin{center}
+    {\Large\textbf {\"U}bungsblatt #1}\\
+    {(Abgabetermin #2)}
+  \end{center}
+}
+
+%Definition der Punktetabelle, hier nichts ändern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr &
+      }
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+    \end{tabularx}
+  \end{center}
+}
+
+\begin{document}
+
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+  \begin{minipage}{\linewidth}
+    \STUDENTA\\
+    \STUDENTB\\
+    \STUDENTC
+  \end{minipage} & \begin{minipage}{\linewidth}
+    \punkteliste{1}{\EXERCISES}
+  \end{minipage}\\
+\end{tabularx}
+
+\header{Nr. \NUMBER}{\DEADLINE}
+
+% ----------------------- TODO ---------------------------
+% Hier werden die Aufgaben/Lösungen eingetragen:
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+\begin{algorithm}[H]
+ function insertionSort$(toSort\left[ ~ \right])$ \\
+  \For{$i \gets 1; i < toSort.length; i \gets i + 1$}{
+			j $\gets$ i\;
+			\While{$(j > 0) \wedge (toSort[j - 1] > toSort[j])$}{
+				tmp $\gets$ toSort[j - 1]\;
+        toSort[j-1] $\gets$ toSort[j]\;
+				toSort[j] $\gets$ tmp\;
+        j $\gets$ j-1\;
+			}     
+ }
+ \caption{Insertion Sort Algorithmus}
+\end{algorithm}
+
+\vspace{1cm}
+
+\begin{algorithm}[H]
+ function minimumSwapSort$(toSort\left[ ~ \right])$ \\
+  \For{$i \gets 0; i < toSort.length - 1; i \gets i + 1$}{
+		\For{$j \gets i + 1; j < toSort.length; i \gets j + 1$}{
+			\If{$toSort[i] > toSort[j]$}{
+				tmp $\gets$ toSort[i]\;
+				toSort[i] $\gets$ toSort[j]\;
+				toSort[j] $\gets$ tmp\;
+			}
+		}	 
+  }
+ \caption{Minimumsuche $+$ Austausch Algorithmus}
+\end{algorithm}
+
+\subsection*{b)}
+
+\subsection*{c)}
+
+\begin{tabular}{l|l|l}
+               & Minimumsuche + Austausch Algorithmus & Insertion Sort \\
+\hline
+Vertauschungen & 0                                    & 0               \\
+\hline
+Vergleiche     & maximal: $\frac{n^2}{2}-\frac{n}{2}$ & $n-1$            \\
+                
+\end{tabular}
+
+\subsection*{d)}
+$n \in \mathbb{N} $ \\
+$A = \left\langle n, n+1, n+2, ... \right\rangle$ \\
+Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vergleiche (für beide Algorithmen)
+
+\subsection*{e)}
+$n \in \mathbb{N} $ \\
+$A = \left\langle n, n-1, n-2, ... \right\rangle$ \\
+Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algorithmen)
+
+
+\section*{Aufgabe 2}
+\subsection*{a)}
+
+\begin{tabular}[t]{ll}
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {2}
+		child {
+			node {10}
+			child {
+				node {16}
+			}
+			child {
+				node {8}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {12}
+		child {
+			node {14}
+		}
+		child {
+			node {6}
+		}
+  }
+;\end{tikzpicture} & 
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {2}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {12}
+		child {
+			node {14}
+		}
+		child {
+			node {6}
+		}
+  }
+;\end{tikzpicture} \\
+
+3. Testblah & 4. Testblah \\
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {2}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} &
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+  child {
+		node {4}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} \\
+
+1. Testblah & 2. Testblah
+
+\end{tabular}
+
+\subsection*{b)}
+
+\begin{tabular}[t]{ll}
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {10} [->]
+  child {
+		node {4}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} &
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {10}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} \\
+
+1. Testblah & 2. Testblah \\
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {8}
+		child {
+			node {10}
+			child {
+				node {16}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} & 
+
+\\
+
+3. Testblah & 
+
+\end{tabular}
+
+
+\subsection*{c)}
+
+\begin{tabular}[t]{ll}
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {8}
+		child {
+			node {10}
+			child {
+				node {16}
+			}
+			child {
+				node {3}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} &
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {8}
+		child {
+			node {3}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} \\
+
+1. Testblah & 2. Testblah \\
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {4} [->]
+  child {
+		node {3}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} & 
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {3} [->]
+  child {
+		node {4}
+		child {
+			node {8}
+			child {
+				node {16}
+			}
+			child {
+				node {10}
+			}
+		}
+		child {
+			node {18}
+		}
+  }
+  child {
+		node {6}
+		child {
+			node {14}
+		}
+		child {
+			node {12}
+		}
+  }
+;\end{tikzpicture} \\
+
+3. Testblah & 4. Testblah
+
+\end{tabular}
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

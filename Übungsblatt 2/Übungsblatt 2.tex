@@ -1,0 +1,269 @@
+
+% ----------------------- TODO ---------------------------
+% Diese Daten müssen pro Blatt angepasst werden:
+\newcommand{\NUMBER}{2}
+\newcommand{\EXERCISES}{3}
+% Diese Daten müssen einmalig pro Vorlesung angepasst werden:
+\newcommand{\COURSE}{Algorithmen}
+\newcommand{\TUTOR}{Jan Splett}
+\newcommand{\STUDENTA}{Sarah Ertel}
+\newcommand{\STUDENTB}{Patrick Greher}
+\newcommand{\STUDENTC}{Eugen Ljavin}
+\newcommand{\DEADLINE}{03.05.2018}
+% ----------------------- TODO ---------------------------
+
+%Template 
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry,forloop,fancyhdr,fancybox,lastpage}
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Math
+\usepackage{amsmath,amssymb,tabularx}
+
+%Figures
+\usepackage{graphicx,tikz,color,float}
+\usetikzlibrary{shapes,trees}
+
+%Algorithms
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+%Kopf- und Fußzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: \TUTOR}
+\fancyhead[C]{\COURSE}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage}
+
+%Formatierung der Überschrift, hier nichts ändern
+\def\header#1#2{
+  \begin{center}
+    {\Large\textbf {\"U}bungsblatt #1}\\
+    {(Abgabetermin #2)}
+  \end{center}
+}
+
+%Definition der Punktetabelle, hier nichts ändern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr &
+      }
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+    \end{tabularx}
+  \end{center}
+}
+
+\begin{document}
+
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+  \begin{minipage}{\linewidth}
+    \STUDENTA\\
+    \STUDENTB\\
+    \STUDENTC
+  \end{minipage} & \begin{minipage}{\linewidth}
+    \punkteliste{1}{\EXERCISES}
+  \end{minipage}\\
+\end{tabularx}
+
+\header{Nr. \NUMBER}{\DEADLINE}
+
+% ----------------------- TODO ---------------------------
+% Hier werden die Aufgaben/Lösungen eingetragen:
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+$A=\left[ 0, 2, 4, 6, 8, 10 \right]$ \\
+$x=4$
+
+\subsection*{b)}
+$A=\left[ 0, 2, 4, 6, 8, 10 \right]$ \\
+$x=2$
+
+\subsection*{c)}
+\begin{algorithm}[H]
+ function ternarySearch$(array\left[ ~ \right], key, lowerBound, upperBound)$ \\
+  \If{$upperBound \geq lowerBound$}{
+   indexLeft $\gets$ (upperBound - lowerBound) / 3 + lowerBound\;
+	 indexRight $\gets$ (upperBound - lowerBound) / 3 + indexLeft\;
+   \If{$array\left[indexLeft\right] = key$}{
+		return indexLeft\;
+		}
+		\If{$array\left[indexRight\right] = key$}{
+		return indexRight\;
+		}
+		\If{$array\left[indexLeft\right] > key$}{
+		return $ternarySearch(array, key, lowerBound, indexLeft - 1)$\;
+		}
+		\If{$array\left[indexRight\right] < key$}{
+		return $ternarySearch(array, key, indexRight + 1, upperBound)$\;
+		}
+		return $ternarySearch(array, key, indexLeft + 1, indexRight - 1);$
+   }
+	 return -1\;
+ \caption{Ternary Search}
+\end{algorithm}
+
+\begin{enumerate}
+	\item 
+	Als Eingabeparameter werden das zu durchsuchende Array $(array\left[ ~ \right])$, das gesuchte Element $(key)$ sowie die untere $(lowerBound)$ und obere $(upperBound)$ Grenze verlangt.
+	$lowerBound$ sowie $upperBound$ werden als Eingabeparameter benötigt, um einen rekursiven Aufruf zu ermöglichen. Beim erstmaligen (nicht rekursiven) Aufruf, sollte für $lowerBound$ der Wert $0$ und für $upperBound$ der Wert $array.length-1$ übergeben weden. \\ 
+	Der Algorithmus liefert den Index des zu suchenden Elements zurück, falls es im Array vorhanden ist. Anderenfalls wird -1 zurückgegeben.
+	
+	\item
+	Abbruchbedingung
+	
+	\item
+	Berechnung der Grenze des ersten und zweiten Drittels.
+	
+	\item
+	Berechnung der Grenze des zweiten und dritten Drittels.
+	
+	\item
+	Überprüfung, ob das gesuchte Element dem Element an Index $indexLeft$ entspricht. 
+	
+	\item \setcounter{enumi}{7}
+	Element wurde gefunden, somit Rückgabe von $indexLeft$
+	
+	\item
+	Überprüfung, ob das gesucht Element dem Element an Index $indexRight$ entspricht. 
+	
+	\item \setcounter{enumi}{10}
+	Element wurde gefunden, somit Rückgabe von $indexRight$
+	
+	\item
+	Überprüfung, ob das gesuchte Element im ersten Drittel liegt
+	
+	\item \setcounter{enumi}{13}
+	Rekursiver Aufruf, sodass im ersten Drittel gesucht wird $\Rightarrow$ Grenzen werden von $lowerBound$ sowie $indexLeft$ (exklusiv) gebildet.
+	
+	\item
+	Überprüfung, ob das gesuchte Element im dritten Drittel liegt
+	
+	\item \setcounter{enumi}{16}
+	Rekursiver Aufruf, sodass im dritten Drittel gesucht wird $\Rightarrow$ Grenzen werden von $indexRight$ (exklusiv) sowie $upperBound$ gebildet.
+	
+	\item \setcounter{enumi}{18}
+	Falls das gesuchte Element nicht im ersten und nicht im dritten Drittel liegt, liegt es im zweiten Drittel.\\
+	Rekursiver Aufruf, sodass im dritten Drittel gesucht wird $\Rightarrow$ Grenzen werden von $indexLeft$ (exklusiv) sowie $indexRight$ (exklusiv) gebildet.
+	
+	\item
+	Rückgabe des Wertes -1 wenn das gesuchte Element nicht im Array liegt.
+	
+\end{enumerate}
+
+\subsection*{d)}
+Die Rekursionsvorschrift für den Binary Search, der den Suchbereich auf zwei Teilbereiche aufteilt und \textbf{einen} Vergleich benötigt, um die Entscheidung zu treffen in welchem Bereich das gesuchte Element liegt, lautet $T(n) = T(\frac{n}{2}) + 1$ (im worst case) und hat eine Komplexität von $\mathcal{O}(\log_2 n)$ \\
+Der Ternary Search teilt den Suchbereich in \textbf{drei} Teile auf und bnötigt zwei Vergleiche (im worst case), um zu enscheiden in welchem Bereich das gesuchte Element liegt. Folglich hat der Ternary Search die Rekursionsvorschrift $T(n) = T(\frac{n}{3}) + 2$. 
+Mit Hilfe des Mastertheorems lässt sich folgende Komplexität ermitteln:
+
+\begin{align*}
+T(n) &= T\left(\frac{n}{3}\right) + 2 \Rightarrow T\left(\frac{n}{3}\right) + \mathcal{O}(1) \\
+\text{Nach dem Mastertheorem gilt: } &a = 1; ~ b = 3; ~ f(n) = \mathcal{O}(1) \\
+\text{Es ist: } &\Theta(n^{\log_3 1}) = \Theta(n^0) = \Theta(1) = f(n) \\
+\text{Nach Fall 2 des Mastertheorems gilt: } &T(n) = \mathcal{O}(1) \cdot \log_3 n = \mathcal{O}(\log_3 n)
+\end{align*}
+
+Da gilt $\mathcal{O}(\log_3 n) < \mathcal{O}(\log_2 n)$ ist die Laufzeit des Ternary Sarch im Vergleich zur Laufzeit des Binary Search besser.
+
+\subsection*{e)}
+\begin{itemize}
+	\item 
+	Minimale Anzahl an Vergleichen: Ein Vergleich je Rekursionsschritt, wenn davon ausgegangen wird, dass das Element im ersten Drittel liegen müsste $\Rightarrow \log_3 n$
+	
+	\item
+	Maximale Anzahl an Vergleichen: Zwei Vergleiche je Rekursionsschritt, wenn davon ausgegangen wird, dass das Element im zweiten oder im dritten Drittel liegen müsste $\Rightarrow 2 \cdot \log_3 n$
+	
+	\item
+	Durchschnittliche Anzahl an Vergleichen: 
+\end{itemize}
+
+\section*{Aufgabe 2}
+\subsection*{a)}
+
+\begin{algorithm}[H]
+ function findTwoSummands$(array\left[ ~ \right], z)$ \\
+	  \For{$i \gets 0; i < array.length; i \gets i + 1$}{
+			x $\gets$ array$\left[i\right]$\;
+			\For{$j \gets 0; j < array.length; j \gets j + 1$}{
+				y $\gets$ array$\left[j\right]$\;
+        \If{$x + y = z \wedge x \neq y$}{
+					return x, y\;
+				}
+			}     
+    }
+		return -1\;
+ \caption{Finde ein $x$ und $y$ mit $x \neq y$, sodass $x + y = z$}
+\end{algorithm} 
+
+\vspace{1cm}
+
+Für den Algorithmus werden zwei verschachtelte Schleifen benötigt. Jedes Element des Arrays wird dazu mit jedem Element des Arrays verglichen, ausgenommen sich selbst. Es werden somit $n \cdot (n-1) = n^2 - n$ Schleifendurchläufe (im Worst Case) getätigt, was einer Laufzeit von $\mathcal{O}(n^2)$ entspricht. 
+
+\subsection*{b)}
+\begin{algorithm}[H]
+ function findTwoSummands$(array\left[ ~ \right], z)$ \\
+	  \For{$i \gets 0; i < array.length; i \gets i + 1$}{
+			x $\gets$ array$\left[i\right]$\;
+			y $\gets$ z - x\;
+        \If{$binarySearch(array, y) \neq -1$}{
+					return x, y\;
+				}
+			}
+		return -1\;
+ \caption{Finde ein $x$ und $y$ mit $x \neq y$, sodass $x + y = z$ mit Binary Search}
+\end{algorithm} 
+
+\vspace{1cm}
+
+Der angegebende Algorithmus führt $n$ mal die Binäre Suche durch (im Worst Case). Es ist bekannt, dass die Binäre Suche eine Laufzeit von $\mathcal{O}(\log n)$ hat. Es ergibt sich also eine Gesamtlaufzeit von $\mathcal{O}(n \cdot \log n)$
+
+\subsection*{c)}
+\begin{algorithm}[H]
+ function findTwoSummands$(array\left[ ~ \right], z)$ \\
+		hashTable\;
+	  \For{$i \gets 0; i < array.length; i \gets i + 1$}{
+			
+			x $\gets$ array$\left[i\right]$\;
+			y $\gets$ z - x\;
+        \If{$hashTable[y] \neq empty$}{
+					return x, y\;
+				}
+				hashTable[x] = x\;
+			}
+		return -1\;
+ \caption{Finde ein $x$ und $y$ mit $x \neq y$, sodass $x + y = z$}
+\end{algorithm} 
+
+\vspace{1cm}
+
+Vorausgesetzt wird eine Datenstruktur, die einen Einfüge- und Suchzugriff konstanter Laufzeit, also $\mathcal{O}(1)$, ermöglicht. Eine solche Datenstruktur ist beispielsweise eine Hash Table. Für alle $n$ Element des Arrays wird eine Such- und ggfs. Einfügeoperation durchgefürt womit sich eine Gesamtlaufzeit von $n \cdot \mathcal{O}(1) = \mathcal{O}(n)$ ergibt.
+
+
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
