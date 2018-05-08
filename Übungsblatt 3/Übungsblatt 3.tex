@@ -148,6 +148,7 @@ Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algori
 
 
 \section*{Aufgabe 2}
+A = {4,2,12,10,18,14,6,16,8}
 \subsection*{a)}
 
 \begin{tabular}[t]{ll}
@@ -156,198 +157,177 @@ Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algori
 \tikzstyle{every node}=[bplus]
 \tikzstyle{level 1}=[sibling distance=30mm]
 \tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {2}
-		child {
-			node {10}
-			child {
-				node {16}
-			}
-			child {
-				node {8}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {12}
-		child {
-			node {14}
-		}
-		child {
-			node {6}
-		}
-  }
-;\end{tikzpicture} & 
+\node {4} 
+;\end{tikzpicture}&
 
 \begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
 \tikzstyle{every node}=[bplus]
 \tikzstyle{level 1}=[sibling distance=30mm]
 \tikzstyle{level 2}=[sibling distance=15mm]
 \node {4} [->]
   child {
 		node {2}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-			child {
-				node {10}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {12}
-		child {
-			node {14}
-		}
-		child {
-			node {6}
-		}
-  }
-;\end{tikzpicture} \\
+	}
+;\end{tikzpicture}\\
 
-3. Testblah & 4. Testblah \\
+1) Die erste Zahl aus dem Array nehmen und\\ als Wurzel einsetzen &
+2) Die nächste Zahl aus dem Array als Child anfügen\\
 
 \begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {2}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-			child {
-				node {10}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} &
-
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
 \tikzstyle{every node}=[bplus]
 \tikzstyle{level 1}=[sibling distance=30mm]
 \tikzstyle{level 2}=[sibling distance=15mm]
 \node {2} [->]
   child {
 		node {4}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-			child {
-				node {10}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} \\
+	}
+;\end{tikzpicture}&
 
-1. Testblah & 2. Testblah
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+	child {
+		node {4}
+	}
+	child{
+  		node {12}
+	}
+;\end{tikzpicture}\\
+
+3) 4 und 2 vertauschen, da $2<4$ &
+4) nächste Zahl als Child anfügen\\
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+	child {
+		node {4}
+			child{
+				node{10}
+  			}
+  			child{
+				node{18}
+			}
+	}
+	child{
+  		node {12}
+  			child{
+  				node{14}
+  			}
+  			child{
+  				node{6}
+  			}
+	}
+;\end{tikzpicture}&
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+	child {
+		node {4}
+			child{
+				node{10}
+  			}
+  			child{
+				node{18}
+			}
+	}
+	child{
+  		node {6}
+  			child{
+  				node{14}
+  			}
+  			child{
+  				node{12}
+  			}
+	}
+;\end{tikzpicture}\\
+
+5) Die nächsten vier Elemente werden angefügt\\ (10,18,14 sind größer als die jeweiligen Parent Elemente) &
+6) Da $6<12$ müssen die beiden Elemente vertauscht werden\\
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+	child {
+		node {4}
+			child{
+				node{10}
+					child{
+						node{16}
+					}
+					child{
+						node{8}
+					}
+  			}
+  			child{
+				node{18}
+			}
+	}
+	child{
+  		node {6}
+  			child{
+  				node{14}
+  			}
+  			child{
+  				node{12}
+  			}
+	}
+;\end{tikzpicture}&
+
+\begin{tikzpicture}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=30mm]
+\tikzstyle{level 2}=[sibling distance=15mm]
+\node {2} [->]
+	child {
+		node {4}
+			child{
+				node{8}
+					child{
+						node{16}
+					}
+					child{
+						node{10}
+					}
+  			}
+  			child{
+				node{18}
+			}
+	}
+	child{
+  		node {6}
+  			child{
+  				node{14}
+  			}
+  			child{
+  				node{12}
+  			}
+	}
+;\end{tikzpicture}\\
+
+6) Die letzten beiden Elemente werden angefügt &
+7) 8 und 10 müssen vertrauscht werden
 
 \end{tabular}
 
 \subsection*{b)}
 
-\begin{tabular}[t]{ll}
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {10} [->]
-  child {
-		node {4}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} &
-
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {10}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} \\
-
-1. Testblah & 2. Testblah \\
-
 \begin{tikzpicture}
 \tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
 \tikzstyle{every node}=[bplus]
@@ -375,115 +355,9 @@ Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algori
 			node {12}
 		}
   }
-;\end{tikzpicture} & 
-
-\\
-
-3. Testblah & 
-
-\end{tabular}
-
+;\end{tikzpicture}
 
 \subsection*{c)}
-
-\begin{tabular}[t]{ll}
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {8}
-		child {
-			node {10}
-			child {
-				node {16}
-			}
-			child {
-				node {3}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} &
-
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {8}
-		child {
-			node {3}
-			child {
-				node {16}
-			}
-			child {
-				node {10}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} \\
-
-1. Testblah & 2. Testblah \\
-
-\begin{tikzpicture}
-\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
-\tikzstyle{every node}=[bplus]
-\tikzstyle{level 1}=[sibling distance=30mm]
-\tikzstyle{level 2}=[sibling distance=15mm]
-\node {4} [->]
-  child {
-		node {3}
-		child {
-			node {8}
-			child {
-				node {16}
-			}
-			child {
-				node {10}
-			}
-		}
-		child {
-			node {18}
-		}
-  }
-  child {
-		node {6}
-		child {
-			node {14}
-		}
-		child {
-			node {12}
-		}
-  }
-;\end{tikzpicture} & 
 
 \begin{tikzpicture}
 \tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]
@@ -515,13 +389,24 @@ Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algori
 			node {12}
 		}
   }
-;\end{tikzpicture} \\
+;\end{tikzpicture}
 
-3. Testblah & 4. Testblah
+\subsection*{d)}
 
-\end{tabular}
+\section*{Aufgabe 3}
+\subsection*{a)}
 
+Ein k-Heap kann wie ein Binärer-Heap als Array dargestellt werden.
+Die Kinderelemente eines Knotens lassen sich hierbei über den Index $i^{k}$ finden. 
+Ebenso lassen sich die 
+\subsection*{b)}
+Die Höhe eines k-Heaps der Größe n beträgt $log_k(n)+1$
+\subsection*{c)}
+\section*{Aufgabe 4}
+\subsection*{a)}
+\subsection*{b)}
 
+\subsection*{c)}
 \end{document}
 %%% Local Variables:
 %%% mode: latex
