@@ -396,12 +396,43 @@ $A = \left\langle {4,2,12,10,18,14,6,16,8} \right\rangle$
 \section*{Aufgabe 3}
 \subsection*{a)}
 
-Ein k-Heap kann wie ein Binärer-Heap als Array dargestellt werden.
-Die Kinderelemente eines Knotens lassen sich hierbei über den Index $i^{k}$ finden. 
-Ebenso lassen sich die 
+Ein k-Heap kann wie ein Binärer-Heap als Array dargestellt werden.\\
+Der Parent node eines Elementes i lässt sich mit  
+$\lfloor(i-1)/k \rfloor$, die Child nodes mit $i*k+1 $ bis $i*k+k$ berechnen. 
 \subsection*{b)}
-Die Höhe eines k-Heaps der Größe n beträgt $log_k(n)+1$
+Die Höhe eines k-Heaps der Größe n ist $\lfloor log_k(n)+1 \rfloor $
 \subsection*{c)}
+
+\begin{algorithm}[H]
+ function insertElement(Element e, k-nary k, Heap data)\\
+ 	positionElement, heapSize $\leftarrow$ heapSize+1\\
+ 	data[heapSize-1] $\leftarrow$ e\\
+ 	\For{$parent = \lfloor (positionElement-1)/k \rfloor$, data[positionElement] $>$ parent;}{
+ 		vertausche (data[positionElement] mit data[parent]
+ 		positionElement $\leftarrow$ parent
+ 	}
+ 	
+ \caption{Insert}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ function ExtractMin(Heap data, k-nary k)\\
+  position $\leftarrow$ 0\\
+  lösche data[position]\\
+  data[position] $\leftarrow$ data[heapSize-1]\\
+  \While{true}{
+  	children[] $\leftarrow$ data[position*k+1] - data[position*k+k]\\
+  	\For{index $\leftarrow$ 0, index $<$ k, index+1}{
+  		\If{children[index]$<$data[position]}{
+  			vertausche(children[index],data[position])\\
+  			position $\leftarrow$ index
+  			index $\leftarrow$ k
+  		}
+  	}
+  }
+ \caption{ExtractMin}
+\end{algorithm}
+
 \section*{Aufgabe 4}
 \subsection*{a)}
 \subsection*{b)}
