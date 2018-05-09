@@ -393,6 +393,7 @@ $A = \left\langle {4,2,12,10,18,14,6,16,8} \right\rangle$
 
 \subsection*{d)}
 
+
 \section*{Aufgabe 3}
 \subsection*{a)}
 
@@ -435,8 +436,13 @@ Die Höhe eines k-Heaps der Größe n ist $\lfloor log_k(n)+1 \rfloor $
 
 \section*{Aufgabe 4}
 \subsection*{a)}
+Für das Array der Länge $n = 2$ sortiert der Algorithmus korrekt, da die Elemente ggfs. vertauscht werden um sie zu sortieren und der Algorithmus terminiert. Bei der Länge $n = 1$ terminiert der Algorithmus direkt.
+
+Für $n > 2$ gilt: \\
+Nach dem Ausführen der Zeile 8 ist der Bereich $A\left[ 1...n-k \right]$ sortiert, sodass die größten Elemente im hinteren Bereich des zweiten Drittels liegen. Nach dem Ausführen der Zeile 9 ist der Bereich $A\left[1+k...n\right]$ sortiert, sodass die größten Elemente am Ende des Arrays stehen. Das zweite Dittel (mittlerer Bereich) ist nun nicht mehr sortiert. Nach dem Ausführen der Zeile 10 ist der Bereich $A\left[ 1...n-k \right]$ wieder sortiert. Da die größten Elemente durch Ausführen der Zeile 9 in das letzte Drittel des Arrays gebracht wurden ist folglich der Bereich $A\left[ 1...n \right]$ und somit das gesamte Array sortiert.
+
 \subsection*{b)}
-Der Algorithmus ruf sich rekursiv drei mal auf und betrachtet dabei $\frac{2}{3}$ der Arraylänge \textbf{n}. Des Weiteren werden zwei Vergleiche durchgeführt, um zu prüfen, ob zwei Elemente getauscht werden müssen sowie für die Abbruchbedingung. Es ergibt sich daraus die Rekursionsvorschrift $T(n) = 3 \cdot T\left(\frac{2}{3} \cdot n\right) + 1$ \\
+Der Algorithmus ruf sich rekursiv drei mal auf und betrachtet dabei $\frac{2}{3}$ der Arraylänge n. Des Weiteren werden zwei Vergleiche durchgeführt, um zu prüfen, ob zwei Elemente getauscht werden müssen sowie für die Abbruchbedingung. Es ergibt sich daraus die Rekursionsvorschrift $T(n) = 3 \cdot T\left(\frac{2}{3} \cdot n\right) + 1$ \\
 Mit Hilfe des Mastertheorems lässt sich folgende Komplexität ermitteln:
 
 \begin{align*}
