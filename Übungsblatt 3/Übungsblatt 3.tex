@@ -148,7 +148,7 @@ Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algori
 
 
 \section*{Aufgabe 2}
-A = {4,2,12,10,18,14,6,16,8}
+$A = \left\langle {4,2,12,10,18,14,6,16,8} \right\rangle$
 \subsection*{a)}
 
 \begin{tabular}[t]{ll}
@@ -405,8 +405,22 @@ Die Höhe eines k-Heaps der Größe n beträgt $log_k(n)+1$
 \section*{Aufgabe 4}
 \subsection*{a)}
 \subsection*{b)}
+Der Algorithmus ruf sich rekursiv drei mal auf und betrachtet dabei $\frac{2}{3}$ der Arraylänge \textbf{n}. Des Weiteren werden zwei Vergleiche durchgeführt, um zu prüfen, ob zwei Elemente getauscht werden müssen sowie für die Abbruchbedingung. Es ergibt sich daraus die Rekursionsvorschrift $T(n) = 3 \cdot T\left(\frac{2}{3} \cdot n\right) + 1$ \\
+Mit Hilfe des Mastertheorems lässt sich folgende Komplexität ermitteln:
+
+\begin{align*}
+T(n) &= 3 \cdot T\left( \frac{2}{3} \cdot n \right) + 1 \Rightarrow 3 \cdot T\left(\frac{2}{3} \cdot n\right) + \mathcal{O}(1) \\
+\text{Nach dem Mastertheorem gilt: } &a = 3; ~ b = \frac{3}{2}; ~ f(n) = 1 = \mathcal{O}(n^c) \text{ mit } c = 0 \\
+\text{Es ist: } &c < \log_{\frac{3}{2}} 3 \\
+\text{Nach Fall 1 des Mastertheorems gilt: } &T(n) = \mathcal{O}(n^{\log_{\frac{3}{2}} 3}) \approx \mathcal{O}(n^{2,7})
+\end{align*}
 
 \subsection*{c)}
+Sowohl Quck-Sort, als auch Minimumsuche $+$ Austausch sowie Insertion Sort haben im worst case eine Komplexität von $\mathcal{O}(n^{2})$. \\
+Setzt man in dieser Teilaufgabe Komplexität mit Effizienz gleich, gilt $\mathcal{O}(n^{2}) < \mathcal{O}(n^{2,7})$. \\
+Damit ist Zwei-Drittel-Sortieren im worst case \textbf{nicht} effizienter als die drei obenstehenden Sortieralgorithmen.
+
+
 \end{document}
 %%% Local Variables:
 %%% mode: latex
