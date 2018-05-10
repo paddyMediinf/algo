@@ -137,16 +137,26 @@ Vergleiche     & maximal: $\frac{n^2}{2}-\frac{n}{2}$ & $n-1$            \\
 \end{tabular}
 
 \subsection*{d)}
-$n \in \mathbb{N} $ \\
-$A = \left\langle n, n+1, n+2, ... \right\rangle$ \\
-Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vergleiche (für beide Algorithmen)
+$n \in \mathbb{N} $
+
+\begin{tabular}{l|l|l}
+               & Minimumsuche + Austausch Algorithmus & Insertion Sort \\
+\hline
+Array & $A = \left\langle n, n+1, n+2, ... \right\rangle$ &  $A = \left\langle n, n-1, n-2, ... \right\rangle$ \\
+\hline
+Anzahl Vergleiche     & $\frac{n^2}{2}-\frac{n}{2}$ & $\frac{n^2 - n}{2}$            \\
+\end{tabular}
 
 \subsection*{e)}
-$n \in \mathbb{N} $ \\
-$A = \left\langle n, n-1, n-2, ... \right\rangle$ \\
-Es gibt dann $\frac{n^2}{2}-\frac{n}{2}-(n-1)$ Vertauschungen (für beide Algorithmen)
+$n \in \mathbb{N} $
 
-
+\begin{tabular}{l|l|l}
+               & Minimumsuche + Austausch Algorithmus & Insertion Sort \\
+\hline
+Array & $A = \left\langle n, n-1, n-2, ... \right\rangle$ & $A = \left\langle n, n-1, n-2, ... \right\rangle$               \\
+\hline
+Anzahl Vertauschungen     & $\frac{n^2}{2}-\frac{n}{2}$ & $\frac{n^2 - n}{2}$            \\
+\end{tabular}
 \section*{Aufgabe 2}
 $A = \left\langle {4,2,12,10,18,14,6,16,8} \right\rangle$
 \subsection*{a)}
@@ -424,6 +434,8 @@ Die Höhe eines k-Heaps der Größe n ist $\lfloor log_k(n)+1 \rfloor $
  	
  \caption{Insert}
 \end{algorithm}
+
+\vspace{1cm}
 
 \begin{algorithm}[H]
  function ExtractMin(Heap data, k-nary k)\\
