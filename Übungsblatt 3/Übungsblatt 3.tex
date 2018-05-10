@@ -131,7 +131,9 @@ Sobald es kein kleineres Element mehr gibt, wird das alte Element weiter mit nac
 Somit wandern die großen Elemente langsam nach oben.\\
 \\
 Minumumsuche + Austausch:\\
-
+Bei der Minimumsuche und Austausch wird das erste Element mit allen folgenden Elementen verglichen und das kleinste Element in eine temporäre Variable gespeichert. Nachdem alle Elemente des Arrays durchlaufen sind, wird das kleinste Element an die erste Stelle gesetzt.\\
+Da sichergestellt ist dass das kleinste Element bereits an erster Stelle sitzt, muss es beim folgenden Durchlauf nicht mehr verglichen werden und man kann in den noch vorhandenen Elementen wieder das kleinste Element suchen und an die erste Stelle der restlichen Elemente setzen.\\
+Somit ist sichergestellt, dass das Array am Ende korrekt sortiert ist.
 
 \subsection*{c)}
 
@@ -165,6 +167,7 @@ Array & $A = \left\langle n, n-1, n-2, ... \right\rangle$ & $A = \left\langle n,
 \hline
 Anzahl Vertauschungen     & $\frac{n^2}{2}-\frac{n}{2}$ & $\frac{n^2 - n}{2}$            \\
 \end{tabular}
+\newpage
 \section*{Aufgabe 2}
 $A = \left\langle {4,2,12,10,18,14,6,16,8} \right\rangle$
 \subsection*{a)}
@@ -420,7 +423,7 @@ Man muss also den Baum traversieren, bis man den maximalen Knoten gefunden hat. 
 \end{itemize}
 
 Es ergibt sich eine Gesamtlaufzeit von $\mathcal{O}(n) + \mathcal{O}(1) + \mathcal{O}(\log n) = \mathcal{O}(n)$.
-
+\newpage
 \section*{Aufgabe 3}
 \subsection*{a)}
 
@@ -462,7 +465,7 @@ Die Höhe eines k-Heaps der Größe n ist $\lfloor log_k(n)+1 \rfloor $
   }
  \caption{ExtractMin}
 \end{algorithm}
-
+\newpage
 \section*{Aufgabe 4}
 \subsection*{a)}
 Für das Array der Länge $n = 2$ sortiert der Algorithmus korrekt, da die Elemente ggfs. vertauscht werden um sie zu sortieren und der Algorithmus terminiert. Bei der Länge $n = 1$ terminiert der Algorithmus direkt.
