@@ -1,6 +1,7 @@
 package aufgabe2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main 
@@ -57,7 +58,7 @@ public class Main
 			intRandomArray[i] = random.nextInt(100);
 		}
 
-/* Comment these lines in if you have implemented Counting Sort.
+ //Comment these lines in if you have implemented Counting Sort.
 		
 		//Sort with countingSort
 		countingSort(intRandomArray);
@@ -69,7 +70,7 @@ public class Main
 				break;
 			}
 		}
-*/		
+		
 		System.out.println("If no errors have been printed, then you passed the test ");
 
 		System.out.println("Merge Sort");		
@@ -96,14 +97,18 @@ public class Main
 	}
 	
 	private static double[] mergeSort1(double[]array) {
+		//Länge des Arrays überprüfen, falls <=1 direkt das Array zurückgeben
 		if (array.length > 1) {
 			comparisonsOfMergeSort++;
+			//Das Array in 2 Teile teilen
 			double[] left = new double[array.length/2];
 			double[] right = new double[array.length-left.length];
 			System.arraycopy(array, 0, left, 0, left.length);
 			System.arraycopy(array, left.length, right, 0, right.length);
+			//die aufgeteilten Teile jeweils weiter aufteilen (Rekursiv)
 			mergeSort1(left);
 			mergeSort1(right);
+			//anfangen das Array zusammenzufügen
 			merge(left,right,array);
 			return array;
 		}else {
@@ -115,8 +120,12 @@ public class Main
 		int indexSortedList = 0;
 		int indexLeft = 0;
 		int indexRight = 0;
+		//Solange es noch Elemente in beiden Hälften gibt diese vergleichen
 		while(indexLeft < left.length && indexRight<right.length) {
 			comparisonsOfMergeSort++;
+			//Ist das linke Element kleiner oder gleich dem rechten Element wird es in die sortierte Liste eingefügt
+			//ansonsten wird das rechte Element in die sortierte Liste eingesetzt
+			//Anschließend wird das eingefügte Element "gelöscht" indem der Index hochgezählt wird
 			if(left[indexLeft]<=right[indexRight]) {
 				comparisonsOfMergeSort++;
 				sortedList[indexSortedList] = left[indexLeft];
@@ -128,11 +137,12 @@ public class Main
 			}
 			indexSortedList++;
 		}
+		//Falls noch Elemente auf der linken seite übrig sein sollten, diese alle in die das Array einfügen
 		if(indexLeft<left.length) {
 			comparisonsOfMergeSort++;
 			System.arraycopy(left, indexLeft, sortedList, indexSortedList, left.length-indexLeft);
 		}
-
+		//Falls noch Elemente auf der rechten Seite übrig sein sollten, diese alle in die das Array einfügen
 		if(indexRight<right.length) {
 			comparisonsOfMergeSort++;
 			System.arraycopy(right, indexRight, sortedList, indexSortedList, right.length-indexRight);
@@ -153,7 +163,9 @@ public class Main
 		quickSort1(array, 0,array.length-1);
 	}
 	private static void quickSort1(double[]array, int left, int right) {
+		//Das Array in 2 Teile teilen und den index des Pivotelemnts berechnen
 		int index = teile(array, left, right);
+		//Rekursiv abhängig vom Index des Pivotelements und der Untergrenze des Arrays die Quicksortfunktion aufrufen
 		if (left < index -1) {
 			comparisonsOfQuickSort++;
 			quickSort1(array, left, index-1);
@@ -167,7 +179,10 @@ public class Main
 		int i = left;
 		int k = right;
 		double tmp;
+		//Pivot Element aus dem ersten und letzen Element berechnen
 		double pivot = array[(left+right)/2];
+		//Hier wird das Array so aufgeteilt, dass alle Elemente die kleiner als das Pivor element sind links stehen
+		//und alle größeren Elemente rechts.
 		while (i<=k) {
 			comparisonsOfQuickSort++;
 			while(array[i] < pivot) {
@@ -187,7 +202,7 @@ public class Main
 				k--;
 			}
 		}
-		
+		//Der Index wird zurückgegeben an dem das Pivotelement letztlich steht
 		return i;
 	}
 	// TODO: Put additional methods for quicksort here.
@@ -201,6 +216,30 @@ public class Main
 	 */
 	public static void countingSort(int[] array) {
 		// TODO: Implementation goes here. 
+		//First set max Range to 100, because that's the range of the used numbers
+		int maxRange = 100;
+		//Create a new array with those numbers and set all values to 0
+		int[] C = new int[maxRange];
+		Arrays.fill(C, 0);
+		//Count the appearence of each number and write to the Array
+		for(int i=0;i<array.length-1;i++) {
+			C[array[i]] = C[array[i]]+1;
+		}
+		//Sum up all numbers
+		for(int i=1;i<maxRange;i++) {
+			C[i] = C[i]+ C[i-1];
+		}
+		//Create a temporary array with the values of the array which has to be sorted to be able to use the original array for the results
+		int[] tmp = array;
+		Arrays.fill(array, 0);
+		//Iterate backwards through the array and write each number to the by C given place. 
+		//Then decrement C for this value to have the correct position for the next element with the same value
+		for(int i=tmp.length-1;i>0;i--) {
+			array[C[tmp[i]]] = tmp[i];
+			if(C[tmp[i]]>0) {
+				C[tmp[i]] = C[tmp[i]] -1;
+			}
+		}
 	}
 	
 	// TODO: Put additional methods for countingsort here.
